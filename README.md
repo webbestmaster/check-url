@@ -3,7 +3,7 @@ check url every few minutes
 
 your-file.js
 ```javascript
-const {ProcessMaster} = require('check-urls');
+const {ProcessMaster} = require('url-master');
 
 const processMaster = new ProcessMaster({
     period: 5000, // every 5s
