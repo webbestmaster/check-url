@@ -1,32 +1,39 @@
-/* global process, setTimeout, process */
-const {MAIL, PASS, PERIOD, URLS} = process.env; // eslint-disable-line no-process-env
+/* global setTimeout */
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 const {requestUrl} = require('./check-url');
 
-if (!MAIL || !PASS || !PERIOD || !URLS) {
-    throw new Error('MAIL, PASS, PERIOD, URLS - should be in process!!!');
-}
-
-const transporter = nodemailer.createTransport(smtpTransport({
-    service: 'gmail',
-    auth: {
-        user: MAIL,
-        pass: PASS
-    }
-}));
-
+/**
+ * ProcessMaster
+ * @param {Object} config to check
+ * @param {number} config.period check every XXX ms
+ * @param {string[]} config.urls list of urls
+ * @param {string} config.mail user mail
+ * @param {string} config.pass user pass
+ * @param {string} config.service mail service
+ */
 class ProcessMaster {
-    constructor() {
+    constructor(config) {
         const model = this;
 
-        model._period = Number(PERIOD); // eslint-disable-line no-underscore-dangle
-        model._urls = URLS.split(/,\s*/g).filter(url => url); // eslint-disable-line no-underscore-dangle
+        model._period = config.period; // eslint-disable-line no-underscore-dangle
+        model._urls = config.urls; // eslint-disable-line no-underscore-dangle
+        model._mail = config.mail; // eslint-disable-line no-underscore-dangle
+
+        model._transporter = nodemailer.createTransport(smtpTransport({ // eslint-disable-line no-underscore-dangle
+            service: config.service,
+            auth: {
+                user: config.mail,
+                pass: config.pass
+            }
+        }));
     }
 
     fetch() {
         const model = this;
         const urls = model._urls; // eslint-disable-line no-underscore-dangle
+        const mail = model._mail; // eslint-disable-line no-underscore-dangle
+        const transporter = model._transporter; // eslint-disable-line no-underscore-dangle
 
         let chain = Promise.resolve();
         const statuses = [];
@@ -52,8 +59,8 @@ class ProcessMaster {
             }
 
             const mailOptions = {
-                from: MAIL,
-                to: MAIL, // eslint-disable-line id-length
+                from: mail,
+                to: mail, // eslint-disable-line id-length
                 subject: 'AAAAAAAAAAight!',
                 // text: 'посмотреть состояние заказа можно'
                 html: '<div>' + statuses.map(status => '<p>' + status + '</p>') + '</div>'
@@ -61,7 +68,7 @@ class ProcessMaster {
 
             transporter.sendMail(mailOptions, (err, info) => err ?
                 console.error(err) :
-                console.log('Email sent to:', MAIL));
+                console.log('Email sent to:', mail));
         });
     }
 

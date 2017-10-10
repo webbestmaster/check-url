@@ -1,15 +1,17 @@
 # check-url
 check url every few minutes
 
-use .env file  
-MAIL=my@gmail.com // support gmail only  
-PASS=some_pass  
-PERIOD=3000  
-URLS=site1.com, site2.com
-
 your-file.js
 ```javascript
 const {ProcessMaster} = require('check-url');
-const processMaster = new ProcessMaster();
+
+const processMaster = new ProcessMaster({
+    period: 5000, // every 5s
+    urls: ['http://google.com', 'http://github.com'],
+    service: 'gmail',
+    mail: 'your@gmail.com',
+    pass: 'pass-from-gmail'
+});
+
 processMaster.run();
 ```
