@@ -1,8 +1,6 @@
-require('dotenv').config();
-
 const {check, requestUrl} = require('./plugin/check-url');
-const {ProcessMaster} = require('./plugin/process-master');
+const {CheckMaster} = require('./plugin/process-master');
 
 module.exports.check = check;
 module.exports.requestUrl = requestUrl;
-module.exports.ProcessMaster = ProcessMaster;
+module.exports.CheckMaster = CheckMaster;

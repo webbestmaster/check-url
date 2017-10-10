@@ -1,13 +1,14 @@
 {
   "name": "url-master",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Check your urls for response 200",
   "keywords": [
     "check",
     "url",
     "urls",
     "time",
-    "periid"
+    "period",
+    "get"
   ],
   "repository": {
     "type": "git",
@@ -22,9 +23,6 @@
   "homepage": "https://github.com/webbestmaster/check-url#readme",
   "private": false,
   "dependencies": {
-    "dotenv": "^4.0.0",
-    "nodemailer": "^4.1.2",
-    "nodemailer-smtp-transport": "^2.7.4",
     "request": "^2.83.0"
   },
   "devDependencies": {

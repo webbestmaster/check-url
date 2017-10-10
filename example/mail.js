@@ -1,20 +1,14 @@
-# check-url
-check url every few minutes
-
-your-file.js
-```javascript
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
-  
-const {CheckMaster} = require('url-master');  
-  
+const {CheckMaster} = require('./../index');
+
 const checkMaster = new CheckMaster({
     period: 5000, // every 5s
-    urls: ['http://google.com', 'http://github.com'],
+    urls: ['http://google.com', 'http://github.com1', 'http://statlex.github.com'],
     onError: urlErr => {
         const mailOptions = {
-            from: 'you@gmail.com',
-            to: 'admin@gmail.com', // eslint-disable-line id-length
+            from: 'web.best.master@gmail.com',
+            to: 'web.best.master@gmail.com', // eslint-disable-line id-length
             subject: 'Aaaaaaaaaight!',
             html: urlErr.statuses.map(status => '<p>' + status + '</p>').join('')
         };
@@ -22,17 +16,15 @@ const checkMaster = new CheckMaster({
         const transporter = nodemailer.createTransport(smtpTransport({
             service: 'gmail',
             auth: {
-                user: 'you@gmail.com',
-                pass: 'you-password'
+                user: 'web.best.master@gmail.com',
+                pass: ''
             }
         }));
 
         transporter.sendMail(mailOptions, mailErr => mailErr ?
             console.error(mailErr) :
-            console.log('Email sent to: admin@gmail.com'));
+            console.log('Email sent to: web.best.master@gmail.com'));
     }
 });
 
 checkMaster.run();
-
-```
