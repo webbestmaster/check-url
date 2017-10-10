@@ -22,8 +22,6 @@ class ProcessMaster {
 
         model._period = Number(PERIOD); // eslint-disable-line no-underscore-dangle
         model._urls = URLS.split(/,\s*/g).filter(url => url); // eslint-disable-line no-underscore-dangle
-
-        model.run();
     }
 
     fetch() {
