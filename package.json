@@ -1,7 +1,26 @@
 {
   "name": "check-urls",
   "version": "0.0.1",
-  "private": true,
+  "description": "Check your urls for response 200",
+  "keywords": [
+    "check",
+    "url",
+    "urls",
+    "time",
+    "periid"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webbestmaster/check-url.git"
+  },
+  "author": "webbestmaster",
+  "license": "MIT",
+  "main": "index.js",
+  "bugs": {
+    "url": "https://github.com/webbestmaster/check-url/issues"
+  },
+  "homepage": "https://github.com/webbestmaster/check-url#readme",
+  "private": false,
   "dependencies": {
     "dotenv": "^4.0.0",
     "nodemailer": "^4.1.2",
@@ -15,7 +34,6 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "lint-fix": "eslint . --fix",
-    "start": "node index.js"
+    "lint-fix": "eslint . --fix"
   }
 }
